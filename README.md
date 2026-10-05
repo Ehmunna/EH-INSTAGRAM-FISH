@@ -1,10 +1,11 @@
-# Easy install tool
+# EH-INSTAGRAM-FISH
 
-![Stars](https://img.shields.io/github/stars/EHMUNNA/EHX-Lab?style=for-the-badge) ![Issues](https://img.shields.io/github/issues/EHMUNNA/EHX-Lab?style=for-the-badge)
-![Repo Size](https://img.shields.io/github/repo-size/EHMUNNA/EHX-Lab?style=for-the-badge)
-![License](https://img.shields.io/github/license/EHMUNNA/EHX-Lab?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/Ehmunna/EH-INSTAGRAM-FISH?style=for-the-badge&label=STARS)
+![Issues](https://img.shields.io/github/issues/Ehmunna/EH-INSTAGRAM-FISH?style=for-the-badge&label=ISSUES)
+![Forks](https://img.shields.io/github/forks/Ehmunna/EH-INSTAGRAM-FISH?style=for-the-badge&label=FORKS)
+![Repo Size](https://img.shields.io/github/repo-size/Ehmunna/EH-INSTAGRAM-FISH?style=for-the-badge&label=REPO%20SIZE)
+![Python](https://img.shields.io/badge/PYTHON-3.x-blue?style=for-the-badge)
 ![Status](https://img.shields.io/badge/STATUS-ACTIVE-brightgreen?style=for-the-badge)
-![Developer](https://img.shields.io/badge/DEVELOPER-EH_MUNNA-brightgreen?style=for-the-badge)
 
 ![My Banner](file_00000000b2f482089ab6c386e03dbdc1.png)
 ## Developer By
