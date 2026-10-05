@@ -8,7 +8,7 @@ apt install git
 apt install cloudflared
 apt install python -y
 pip install colorama
-git clone https://github.com/Ehmunna/EH-FB-FISH.git
-cd EH-FB-FISH
+git clone https://github.com/Ehmunna/EH-INSTAGRAM-FISH.git
+cd 
 python EH-FB.py
 ```
