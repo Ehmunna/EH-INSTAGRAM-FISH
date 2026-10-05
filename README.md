@@ -1,5 +1,10 @@
+# Easy install tool
+
+![Stars](https://img.shields.io/github/stars/EHMUNNA/EHX-Lab?style=for-the-badge)
+
+
 ![My Banner](file_00000000b2f482089ab6c386e03dbdc1.png)
-# Developer By
+## Developer By
 ![My Banner](Logo.jpeg)
 ## Termux use
 ```
